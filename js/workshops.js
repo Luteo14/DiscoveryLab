@@ -1,0 +1,9 @@
+(()=>{'use strict';
+const buttons=[...document.querySelectorAll('[data-page]')];
+function syncNav(){const visible=document.querySelector('.page:not(.hidden)');const page=visible?.id||'home';document.querySelectorAll('nav [data-page]').forEach(btn=>{const selected=btn.dataset.page===page||(btn.dataset.page==='experience'&&['contribute','board'].includes(page));btn.classList.toggle('active',selected);if(selected)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current')})}
+buttons.forEach(btn=>btn.addEventListener('click',()=>{syncNav();document.querySelector('#siteNav')?.classList.remove('is-open');document.querySelector('#menuToggle')?.setAttribute('aria-expanded','false')}));
+const nav=document.querySelector('#siteNav'),toggle=document.querySelector('#menuToggle');toggle?.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open))});
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{const phase=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>{let active=b===button;b.classList.toggle('is-selected',active);b.setAttribute('aria-pressed',String(active))});document.querySelectorAll('.workshop-card').forEach(card=>card.classList.toggle('hidden',phase!=='all'&&card.dataset.phase!==phase))}));
+document.querySelectorAll('[data-workshop]').forEach(button=>button.addEventListener('click',()=>{const details=document.getElementById('detail-'+button.dataset.workshop);const expand=details.classList.contains('hidden');details.classList.toggle('hidden',!expand);button.setAttribute('aria-expanded',String(expand));button.lastElementChild.textContent=expand?'−':'＋'}));
+const hash=decodeURIComponent(location.hash.slice(1));if(['home','method','workshops','experience'].includes(hash)){const b=document.querySelector('[data-page="'+hash+'"]');b?.click()}syncNav();
+})();
