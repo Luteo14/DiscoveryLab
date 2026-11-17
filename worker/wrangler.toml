@@ -8,5 +8,5 @@ ALLOWED_ORIGINS = "https://luteo14.github.io"
 [[d1_databases]]
 binding = "DB"
 database_name = "luteo14-discover-lab"
-database_id = "REMPLACER_PAR_ID_D1"
+database_id = "79eb2649-dd4a-4328-ae5b-9c21644928d9"
 migrations_dir = "migrations"
