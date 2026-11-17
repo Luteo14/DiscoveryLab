@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS contributions (id TEXT PRIMARY KEY,created_at TEXT NOT NULL,updated_at TEXT,session_code TEXT NOT NULL,identity_mode TEXT NOT NULL,participant_name TEXT,type TEXT NOT NULL,theme TEXT NOT NULL,theme_other TEXT,title TEXT NOT NULL,description TEXT NOT NULL,context TEXT,frequency TEXT,impact TEXT,benefit TEXT,status TEXT NOT NULL DEFAULT 'pending');
+CREATE INDEX IF NOT EXISTS idx_contributions_session_status ON contributions(session_code,status,created_at);
+CREATE TABLE IF NOT EXISTS audit (id TEXT PRIMARY KEY,contribution_id TEXT NOT NULL,action TEXT NOT NULL,created_at TEXT NOT NULL);
